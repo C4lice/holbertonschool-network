@@ -1,0 +1,38 @@
+User Browser
+     |
+     v
+DNS Resolution (www.google.com → Server IP)
+     |
+     v
+Encrypted HTTPS Request (TCP 443)
+     |
+     v
++------------+
+|  Firewall  |   (filters incoming traffic)
++------------+
+     |
+     v
++----------------+
+| Load Balancer  |   (distributes traffic to servers)
++----------------+
+     |
+     v
++-------------+        +----------------+
+| Web Server  | -----> | Application    |
+| (Nginx/etc) |        | Server (logic) |
++-------------+        +----------------+
+                            |
+                            v
+                     +---------------+
+                     | Database (DB) |
+                     +---------------+
+
+Flow:
+- Browser resolves domain via DNS
+- HTTPS encrypts request
+- Firewall filters
+- Load balancer spreads traffic
+- Web server serves static files / forwards dynamic requests
+- App server generates page (business logic)
+- App server queries DB for data
+- Response flows back to browser
